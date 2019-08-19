@@ -11,7 +11,9 @@ class ReviewsController < ApplicationController
   end
 
   def create
+    country_id = Country.search(params[:country])
     @review = Review.create(review_params)
+    @review.country_id = country_id
     json_response(@review)
   end
 
