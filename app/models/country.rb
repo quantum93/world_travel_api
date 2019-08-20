@@ -18,4 +18,12 @@ class Country < ApplicationRecord
     # .limit(1)
     )}
 
+  scope :random_place, -> {(
+    select("countries.id, countries.name")
+    .order("random()")
+    .limit(1)
+    # .joins(:reviews)
+    # .group("countries.id")
+    )}
+
 end

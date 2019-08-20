@@ -36,6 +36,14 @@ class CountriesController < ApplicationController
     json_response(@most_rates)
   end
 
+# This is for the random selection of country
+  def suprising_country
+    @random_place = Country.random_place
+    @reviews = Review.where(country_id: @random_place[0].id)
+    byebug
+    json_response([@random_place, @reviews])
+  end
+
   private
   def json_response(object)
     render json: object, status: :ok
