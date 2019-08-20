@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_19_225526) do
+ActiveRecord::Schema.define(version: 2019_08_20_181600) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,6 +23,7 @@ ActiveRecord::Schema.define(version: 2019_08_19_225526) do
     t.integer "country_id"
     t.integer "rating"
     t.text "content"
+    t.string "user_name"
   end
 
   add_foreign_key "reviews", "countries"

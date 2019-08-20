@@ -35,7 +35,12 @@ class ReviewsController < ApplicationController
 
   def destroy
     @review = Review.find(params[:id])
-    @review.destroy
+    if !params[:user_name] || params[:user_name] != @review.user_name
+      json_response("You are not authorized to do this!")
+    else
+      @review.destroy
+      json_response(@review)
+    end
   end
 
   private
