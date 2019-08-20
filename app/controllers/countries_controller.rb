@@ -1,7 +1,7 @@
 class CountriesController < ApplicationController
 
   def index
-    @countries = "united state"
+    @countries = Country.pluck("name")
     json_response(@countries)
   end
 
@@ -25,7 +25,7 @@ class CountriesController < ApplicationController
     @country.destroy
   end
 
-# These two functions are for scope
+# These two functions are for scopeid,
   def popular_country
     @most_reviews = Country.most_reviews
     json_response(@most_reviews)
@@ -40,7 +40,6 @@ class CountriesController < ApplicationController
   def suprising_country
     @random_place = Country.random_place
     @reviews = Review.where(country_id: @random_place[0].id)
-    byebug
     json_response([@random_place, @reviews])
   end
 
