@@ -6,7 +6,6 @@ class ReviewsController < ApplicationController
       @reviews = Review.all
     else
       country = Country.search(params[:country])
-      byebug
       if country[0]
         @reviews = Review.where(country_id: country[0].id)
       else
