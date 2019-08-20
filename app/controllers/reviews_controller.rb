@@ -1,7 +1,18 @@
 class ReviewsController < ApplicationController
 
   def index
-    @reviews = Review.all
+    country_name = params[:country]
+    if country_name == nil
+      @reviews = Review.all
+    else
+      country = Country.search(params[:country])
+      byebug
+      if country[0]
+        @reviews = Review.where(country_id: country[0].id)
+      else
+        @reviews = []
+      end
+    end
     json_response(@reviews)
   end
 
@@ -11,9 +22,9 @@ class ReviewsController < ApplicationController
   end
 
   def create
-    country_id = Country.search(params[:country])
+    # country_id = Country.search(params[:country])
     @review = Review.create(review_params)
-    @review.country_id = country_id
+    # @review.country_id = country_id
     json_response(@review)
   end
 
